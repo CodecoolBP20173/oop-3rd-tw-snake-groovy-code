@@ -4,6 +4,7 @@ import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 public class Game extends Pane {
@@ -23,6 +24,10 @@ public class Game extends Pane {
     }
 
     public void start() {
+        Button resumeButton = new Button("Resume");
+        Button restartButton = new Button("Restart");
+        Button exitButton = new Button("Exit");
+
         Scene scene = getScene();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
