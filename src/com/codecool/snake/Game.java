@@ -99,7 +99,9 @@ public class Game extends Pane {
                 case R: Globals.rKeyDown = true;
                     restart();
                     break;
-
+                case K: Globals.kKeyDown = true;
+                    exit();
+                    break;
             }
         });
 

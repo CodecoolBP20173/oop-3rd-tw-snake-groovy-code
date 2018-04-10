@@ -24,6 +24,7 @@ public class Globals {
     public static boolean rightKeyDown;
     public static boolean pKeyDown;
     public static boolean rKeyDown;
+    public static boolean kKeyDown;
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
