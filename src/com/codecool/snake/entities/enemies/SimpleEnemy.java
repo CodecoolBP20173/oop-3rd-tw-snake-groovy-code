@@ -21,6 +21,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     private Point2D heading;
     private static final int damage = 10;
     HelathText text;
+    private double direction;
 
     public SimpleEnemy(Pane pane) {
         super(pane);
@@ -28,13 +29,10 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         setImage(Globals.simpleEnemy);
         pane.getChildren().add(this);
         int speed = 1;
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-
-        double direction = randomDirection();
-        setRotate(direction);
-        heading = Utils.directionToVector(direction, speed);
+        startingPosition();
+        this.direction = randomDirection();
+        setRotate(this.direction);
+        heading = Utils.directionToVector(this.direction, speed);
     }
 
     public double randomDirection(){
@@ -81,14 +79,26 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
 
     }
 
-    /*public void collisionHandling(){
-
-    }*/
+    public void collisionHandling(){
+        int speed = 1;
+        if (this.getX() < 10) {
+            setX(10);
+        } else if (this.getX() > 940) {
+            setX(940);
+        } else if (this.getY() < 10){
+            setY(10);
+        } else if (this.getY() < 900) {
+            setY(900);
+        }
+        this.direction = randomDirection();
+        setRotate(this.direction);
+        heading = Utils.directionToVector(this.direction, speed);
+    }
 
     @Override
     public void step() {
         if (isOutOfBounds()) {
-            destroy();
+            collisionHandling();
         }
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
