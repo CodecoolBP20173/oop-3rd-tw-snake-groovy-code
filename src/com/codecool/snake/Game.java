@@ -86,6 +86,33 @@ public class Game extends Pane {
 
     }
 
+    public void gameOverDialog() {
+
+        Scene scene = getScene();
+        Button newGameButton = new Button("New Game");
+        Button exitButton = new Button("Exit");
+
+        final Stage gameOverDialog = new Stage();
+        gameOverDialog.initModality(Modality.APPLICATION_MODAL);
+        gameOverDialog.initOwner(scene.getWindow());
+        VBox dialogWindow = new VBox(25);
+        dialogWindow.getChildren().addAll(new Text("Game Over"),
+                newGameButton,
+                exitButton);
+        Scene dialogScene = new Scene(dialogWindow, 500, 300);
+        gameOverDialog.setScene(dialogScene);
+        gameOverDialog.show();
+
+        newGameButton.setOnMouseClicked(event -> {
+            restart();
+            gameOverDialog.close();
+        });
+
+        exitButton.setOnMouseClicked(event -> {
+            exit();
+        });
+    }
+
     public void start() {
 
         Scene scene = getScene();
