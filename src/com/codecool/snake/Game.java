@@ -21,16 +21,7 @@ public class Game extends Pane {
     void create(){
         new SnakeHead(this, 500, 500);
 
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-
-        new SimpleEnemy(this);
+        spawnEnemies("simple", Globals.MAX_ENEMIES);
 
 
         new SimplePowerup(this);
@@ -38,6 +29,18 @@ public class Game extends Pane {
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SpeedPowerUp(this);
+    }
+
+    public void spawnEnemy(String type){
+        switch (type){
+            case "simple" : new SimpleEnemy(this);
+        }
+    }
+
+    public void spawnEnemies(String type, int count){
+        for (int i = 0; i < count; i++) {
+            spawnEnemy(type);
+        }
     }
 
     public void resume(){
@@ -159,4 +162,6 @@ public class Game extends Pane {
     public  void newSpeedPowerUp(){
         new SpeedPowerUp(this);
     }
+
+
 }
