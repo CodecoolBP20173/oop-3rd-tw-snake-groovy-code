@@ -9,6 +9,7 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.HelathText;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.SpeedPowerUp;
+import com.codecool.snake.entities.powerups.Shoot;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -56,11 +57,24 @@ public class SnakeHead extends GameEntity implements Animatable {
             }
 
         }
-        // set rotation and position
         setRotate(dir);
+        if (Globals.spaceDown){
+            boolean isShooting=false;
+            for (GameEntity entity : Globals.getGameObjects()){
+                if (entity instanceof Shoot){
+                    isShooting=true;
+                }
+            }
+            if (!isShooting){
+                new Shoot(this.pane,getX(),getY(),dir);
+            }
+        }
+        // set rotation and position
         Point2D heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
+
+
 
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
