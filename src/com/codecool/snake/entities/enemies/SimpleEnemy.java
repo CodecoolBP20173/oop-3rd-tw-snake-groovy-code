@@ -6,11 +6,13 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.HelathText;
-import com.codecool.snake.entities.powerups.Shoot;
+import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 // a simple enemy TODO make better ones.
@@ -30,10 +32,31 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-        double direction = rnd.nextDouble() * 360;
+        double direction = randomDirection();
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
     }
+
+    public double randomDirection(){
+        Random rnd = new Random();
+        return rnd.nextDouble() * 360;
+    }
+
+    public void startingPosition(){
+        List<Double> playerXPos = new ArrayList<>();
+        List<Double> playerYPos = new ArrayList<>();
+
+        for (GameEntity entity: Globals.getGameObjects()){
+            if (entity instanceof SnakeHead || entity instanceof SnakeBody){
+                playerXPos.add(entity.getX());
+                playerYPos.add(entity.getY());
+            }
+        }
+    }
+
+    /*public void collisionHandling(){
+
+    }*/
 
     @Override
     public void step() {
