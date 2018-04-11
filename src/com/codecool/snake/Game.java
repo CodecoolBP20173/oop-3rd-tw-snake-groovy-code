@@ -4,6 +4,7 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.Shoot;
 import com.codecool.snake.entities.powerups.SimplePowerup;
+import com.codecool.snake.entities.powerups.SpeedPowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,11 +25,19 @@ public class Game extends Pane {
         new SimpleEnemy(this);
         new SimpleEnemy(this);
         new SimpleEnemy(this);
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+
+        new SimpleEnemy(this);
+
 
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
+        new SpeedPowerUp(this);
     }
 
     public void resume(){
@@ -87,6 +96,33 @@ public class Game extends Pane {
 
     }
 
+    public void gameOverDialog() {
+
+        Scene scene = getScene();
+        Button newGameButton = new Button("New Game");
+        Button exitButton = new Button("Exit");
+
+        final Stage gameOverDialog = new Stage();
+        gameOverDialog.initModality(Modality.APPLICATION_MODAL);
+        gameOverDialog.initOwner(scene.getWindow());
+        VBox dialogWindow = new VBox(25);
+        dialogWindow.getChildren().addAll(new Text("Game Over"),
+                newGameButton,
+                exitButton);
+        Scene dialogScene = new Scene(dialogWindow, 500, 300);
+        gameOverDialog.setScene(dialogScene);
+        gameOverDialog.show();
+
+        newGameButton.setOnMouseClicked(event -> {
+            restart();
+            gameOverDialog.close();
+        });
+
+        exitButton.setOnMouseClicked(event -> {
+            exit();
+        });
+    }
+
     public void start() {
 
         Scene scene = getScene();
@@ -116,5 +152,11 @@ public class Game extends Pane {
         });
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
+    }
+    public  void newPowerUp(){
+        new SimplePowerup(this);
+    }
+    public  void newSpeedPowerUp(){
+        new SpeedPowerUp(this);
     }
 }
