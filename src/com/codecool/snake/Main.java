@@ -12,6 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         Globals.game = new Game();
 
         primaryStage.setTitle("Snake Game");
