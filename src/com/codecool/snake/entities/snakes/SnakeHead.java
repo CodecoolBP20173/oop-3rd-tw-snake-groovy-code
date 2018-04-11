@@ -7,6 +7,7 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -23,7 +24,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         tail = this;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
-
         addPart(4);
     }
 
@@ -54,9 +54,20 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
-            System.out.println("Game Over");
-            Globals.gameLoop.stop();
+            gameOver();
         }
+    }
+
+    public void destroyAllEntity(){
+        for (GameEntity entity: Globals.getGameObjects()){
+            entity.destroy();
+        }
+    }
+
+    public void gameOver(){
+        System.out.println("game over");
+        destroyAllEntity();
+        Globals.gameLoop.stop();
     }
 
     public void addPart(int numParts) {
