@@ -20,5 +20,11 @@ public class GameLoop extends AnimationTimer {
 
         Globals.gameObjects.removeAll(Globals.oldGameObjects);
         Globals.oldGameObjects.clear();
+
+        if (Globals.pKeyDown){
+            Globals.gameLoop.stop();
+        } else if (Globals.rKeyDown){
+            Globals.gameLoop.stop();
+        }
     }
 }
