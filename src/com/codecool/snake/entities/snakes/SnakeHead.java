@@ -7,6 +7,8 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.HelathText;
+import com.codecool.snake.entities.powerups.SimplePowerup;
+import com.codecool.snake.entities.powerups.SpeedPowerUp;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -40,10 +42,19 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void step() {
         double dir = getRotate();
         if (Globals.leftKeyDown) {
-            dir = dir - turnRate;
+            if (!SpeedPowerUp.turn){
+                dir = dir - turnRate;
+            }else{
+                dir = dir + turnRate;
+            }
         }
         if (Globals.rightKeyDown) {
-            dir = dir + turnRate;
+            if(!SpeedPowerUp.turn){
+                dir = dir + turnRate;
+            }else{
+                dir = dir - turnRate;
+            }
+
         }
         // set rotation and position
         setRotate(dir);
@@ -70,7 +81,7 @@ public class SnakeHead extends GameEntity implements Animatable {
             isGameOver = true;
         }
     }
-    
+
     public void gameOver() {
         Globals.gameLoop.stop();
         System.out.println("game over");
