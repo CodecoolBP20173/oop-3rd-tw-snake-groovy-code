@@ -52,6 +52,33 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
                 playerYPos.add(entity.getY());
             }
         }
+        Random rnd = new Random();
+        Double enemyXPos = rnd.nextDouble()*Globals.WINDOW_WIDTH;
+        Double enemyYPos = rnd.nextDouble()*Globals.WINDOW_HEIGHT;
+
+        for (Double snakeXPos: playerXPos){
+            if (enemyXPos < 700 && enemyXPos > 300){
+                if(enemyXPos < 600) {
+                    enemyXPos -= snakeXPos / 2;
+                } else if (enemyYPos >= 400){
+                    enemyXPos += snakeXPos / 2;
+                }
+            }
+        }
+
+        for (Double snakeYPos: playerYPos){
+            if (enemyYPos < 700 && enemyYPos > 300){
+                if (enemyYPos < 600){
+                    enemyYPos -= snakeYPos / 2;
+                } else if (enemyYPos >= 400){
+                    enemyYPos += snakeYPos / 2;
+                }
+            }
+        }
+
+        setX(enemyXPos);
+        setY(enemyYPos);
+
     }
 
     /*public void collisionHandling(){
