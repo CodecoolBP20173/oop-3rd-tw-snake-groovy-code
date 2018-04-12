@@ -22,7 +22,7 @@ public class Game extends Pane {
     void create(){
         new SnakeHead(this, 500, 500);
 
-        spawnEnemies("simple", Globals.MAX_ENEMIES / 2);
+        spawnEnemies("simple", Globals.MAX_ENEMIES - 3);
         spawnEnemies("drunk", 3);
 
         new SimplePowerup(this);

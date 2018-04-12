@@ -97,7 +97,10 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
 
     @Override
     public void destroy(){
-        if (Globals.numberOfEnemies < Globals.MAX_ENEMIES) Globals.game.spawnEnemy("simple");
+        if (Globals.numberOfEnemies < Globals.MAX_ENEMIES) {
+            new SimpleEnemy(pane);
+            Globals.numberOfEnemies++;
+        }
         Globals.numberOfEnemies--;
         super.destroy();
     }
