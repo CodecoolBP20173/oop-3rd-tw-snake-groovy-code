@@ -26,6 +26,7 @@ public class Game extends Pane {
         spawnEnemies("simple", 3);
         spawnEnemies("drunk", 3);
         spawnEnemies("fear",2);
+        spawnEnemies("power", 2);
 
         new SimplePowerup(this);
         new SimplePowerup(this);

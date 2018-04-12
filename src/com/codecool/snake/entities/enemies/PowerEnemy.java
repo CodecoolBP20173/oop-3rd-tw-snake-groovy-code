@@ -12,6 +12,7 @@ public class PowerEnemy extends SimpleEnemy{
 
     public PowerEnemy(Pane pane) {
         super(pane);
+        startingPosition();
         setImage(Globals.fear);
     }
 
@@ -57,6 +58,15 @@ public class PowerEnemy extends SimpleEnemy{
         moveTowardsPlayer();
     }
 
+    @Override
+    public void destroy(){
+        if (Globals.numberOfEnemies < Globals.MAX_ENEMIES) {
+            new PowerEnemy(pane);
+            Globals.numberOfEnemies++;
+        }
+        Globals.numberOfEnemies--;
+        super.destroy();
+    }
 
     @Override
     public void apply(SnakeHead player) {
