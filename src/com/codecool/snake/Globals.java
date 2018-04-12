@@ -13,10 +13,12 @@ public class Globals {
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
+    public static final int MAX_ENEMIES = 9;
 
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
+    public static Image drunkEnemy = new Image("drunk_enemy.png");
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image speedBerry = new Image("Speed.resized.png");
     public static Image fear = new Image("fear-monster.resized.png");
@@ -31,6 +33,7 @@ public class Globals {
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
+    public static int numberOfEnemies;
     public static GameLoop gameLoop;
     public static Game game;
 

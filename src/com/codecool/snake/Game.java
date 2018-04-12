@@ -1,11 +1,12 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.enemies.DrunkEnemy;
 import com.codecool.snake.entities.enemies.PowerEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
-import com.codecool.snake.entities.powerups.Shoot;
+import com.codecool.snake.entities.powerups.InverseDirectionPowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerup;
-import com.codecool.snake.entities.powerups.SpeedPowerUp;
+import com.codecool.snake.entities.powerups.SpeedChangePowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,21 +21,32 @@ public class Game extends Pane {
     public Game() {create();}
 
     void create(){
-        Globals.snakehead=new SnakeHead(this, 500, 500);
+        new SnakeHead(this, 500, 500);
 
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new PowerEnemy(this);
-
+        spawnEnemies("simple", 3);
+        spawnEnemies("drunk", 3);
+        spawnEnemies("fear",2);
 
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
-        new SpeedPowerUp(this);
+        new InverseDirectionPowerUp(this);
+        new SpeedChangePowerUp(this);
+    }
+
+    public void spawnEnemy(String type){
+        switch (type){
+            case "simple" : new SimpleEnemy(this); break;
+            case "drunk" : new DrunkEnemy(this); break;
+            case "fear" : new PowerEnemy(this); break;
+        }
+    }
+
+    public void spawnEnemies(String type, int count){
+        for (int i = 0; i < count; i++) {
+            spawnEnemy(type);
+        }
     }
 
     public void resume(){
@@ -153,7 +165,9 @@ public class Game extends Pane {
     public  void newPowerUp(){
         new SimplePowerup(this);
     }
-    public  void newSpeedPowerUp(){
-        new SpeedPowerUp(this);
+    public  void inverseDirection(){
+        new InverseDirectionPowerUp(this);
     }
+
+
 }

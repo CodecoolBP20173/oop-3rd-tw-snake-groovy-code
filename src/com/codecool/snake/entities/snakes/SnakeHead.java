@@ -1,31 +1,27 @@
 package com.codecool.snake.entities.snakes;
 
-import com.codecool.snake.Game;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
-import com.codecool.snake.entities.HelathText;
+import com.codecool.snake.entities.HealthText;
 import com.codecool.snake.entities.powerups.SimplePowerup;
-import com.codecool.snake.entities.powerups.SpeedPowerUp;
+import com.codecool.snake.entities.powerups.SpeedChangePowerUp;
+import com.codecool.snake.entities.powerups.InverseDirectionPowerUp;
 import com.codecool.snake.entities.powerups.Shoot;
 import javafx.geometry.Point2D;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+
+import java.util.Random;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 2;
-    private static final float turnRate = 2;
+    private static float speed = 2;
+    private static float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
-    private HelathText text;
+    private HealthText text;
     private boolean isGameOver;
 
 
@@ -38,20 +34,20 @@ public class SnakeHead extends GameEntity implements Animatable {
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
         addPart(4);
-        text=new HelathText(pane,this);
+        text=new HealthText(pane,this);
     }
 
     public void step() {
         double dir = getRotate();
         if (Globals.leftKeyDown) {
-            if (!SpeedPowerUp.turn){
+            if (!InverseDirectionPowerUp.turn){
                 dir = dir - turnRate;
             }else{
                 dir = dir + turnRate;
             }
         }
         if (Globals.rightKeyDown) {
-            if(!SpeedPowerUp.turn){
+            if(!InverseDirectionPowerUp.turn){
                 dir = dir + turnRate;
             }else{
                 dir = dir - turnRate;
@@ -111,17 +107,28 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
     }
 
+    public void changeSnakeSpeed(){
+        Random random = new Random();
+        speed = random.nextInt(6 - 1 + 1) + 1;
+        turnRate = speed;
+    }
+
+    public static float getSpeed() {
+        return speed;
+    }
+
     public void changeHealth ( int diff){
             health += diff;
         }
 
-
-    public HelathText getText() {
+    public HealthText getText() {
         return text;
     }
 
     public int getHealth() {
         return health;
     }
+
+
 }
 
