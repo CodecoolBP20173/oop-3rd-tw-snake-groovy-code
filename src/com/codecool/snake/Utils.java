@@ -2,7 +2,17 @@ package com.codecool.snake;
 
 import javafx.geometry.Point2D;
 
+import java.util.Random;
+
 public class Utils {
+
+    public static Random rand = new Random(System.nanoTime());
+    public static int randInt(int min, int max) {
+        return rand.nextInt((max - min) + 1) + min;
+    }
+    public static double randDouble(double min, double max) {
+        return rand.nextDouble()*(max-min)+min;
+    }
 
     /*
     Converts a direction in degrees (0...360) to x and y coordinates.
