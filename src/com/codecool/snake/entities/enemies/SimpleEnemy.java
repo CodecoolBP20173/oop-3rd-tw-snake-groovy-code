@@ -25,7 +25,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
 
     public SimpleEnemy(Pane pane) {
         super(pane);
-
+        Globals.numberOfEnemies++;
         setImage(Globals.simpleEnemy);
         pane.getChildren().add(this);
         int speed = 1;
@@ -93,6 +93,13 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         this.direction = randomDirection();
         setRotate(this.direction);
         heading = Utils.directionToVector(this.direction, speed);
+    }
+
+    @Override
+    public void destroy(){
+        if (Globals.numberOfEnemies < Globals.MAX_ENEMIES) Globals.game.spawnEnemy("simple");
+        Globals.numberOfEnemies--;
+        super.destroy();
     }
 
     @Override
