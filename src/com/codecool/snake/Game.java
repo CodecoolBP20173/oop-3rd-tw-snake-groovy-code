@@ -3,9 +3,9 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.DrunkEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
-import com.codecool.snake.entities.powerups.Shoot;
+import com.codecool.snake.entities.powerups.InverseDirectionPowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerup;
-import com.codecool.snake.entities.powerups.SpeedPowerUp;
+import com.codecool.snake.entities.powerups.SpeedChangePowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,7 +29,8 @@ public class Game extends Pane {
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
-        new SpeedPowerUp(this);
+        new InverseDirectionPowerUp(this);
+        new SpeedChangePowerUp(this);
     }
 
     public void spawnEnemy(String type){
@@ -161,8 +162,8 @@ public class Game extends Pane {
     public  void newPowerUp(){
         new SimplePowerup(this);
     }
-    public  void newSpeedPowerUp(){
-        new SpeedPowerUp(this);
+    public  void inverseDirection(){
+        new InverseDirectionPowerUp(this);
     }
 
 
