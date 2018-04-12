@@ -51,7 +51,7 @@ public class PowerEnemy extends GameEntity implements Animatable, Interactable{
         player.changeHealth(-damage);
         player.getText().changeHealth(player.getHealth(),player);
         destroy();
-        
+
     }
 
     @Override
