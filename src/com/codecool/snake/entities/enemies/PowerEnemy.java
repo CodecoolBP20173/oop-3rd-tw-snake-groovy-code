@@ -3,6 +3,7 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
+import jdk.nashorn.internal.objects.Global;
 
 
 public class PowerEnemy extends SimpleEnemy{
@@ -70,7 +71,7 @@ public class PowerEnemy extends SimpleEnemy{
 
     @Override
     public void apply(SnakeHead player) {
-        player.getText().changeHealth(player.getHealth(),player);
+        Globals.healthText.changeHealth(player.getHealth());
         player.changeHealth(-damage);
         destroy();
         new PowerEnemy(pane);
