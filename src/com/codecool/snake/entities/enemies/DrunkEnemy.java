@@ -1,11 +1,11 @@
 package com.codecool.snake.entities.enemies;
 
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
-import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
+//import com.codecool.snake.entities.HealthText;
+import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.Interactable;
-import com.codecool.snake.entities.HealthText;
 import com.codecool.snake.entities.powerups.Shoot;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
@@ -28,7 +28,6 @@ public class DrunkEnemy extends SimpleEnemy {
     private Point2D heading;
     private double speed, direction;
     private int damage = 15;
-    HealthText text;
 
     public DrunkEnemy(Pane pane) {
         super(pane);
@@ -46,7 +45,7 @@ public class DrunkEnemy extends SimpleEnemy {
     }
 
     private void setMovementAndDamage(){
-        damage = Utils.randInt(-5, 15);
+        damage = Utils.randInt(10, 25);
         speed = Utils.randDouble(0.5, 3);
         direction += Utils.randDouble(-15, 15) % 360;
         setRotate(direction);
@@ -75,7 +74,7 @@ public class DrunkEnemy extends SimpleEnemy {
     @Override
     public void apply(SnakeHead player) {
         player.changeHealth(-damage);
-        player.getText().changeHealth(player.getHealth(),player);
+        Globals.healthText.changeHealth(player.getHealth());
         destroy();
     }
 

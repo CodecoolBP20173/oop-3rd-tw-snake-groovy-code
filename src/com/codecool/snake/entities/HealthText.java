@@ -13,7 +13,7 @@ public class HealthText extends Text{
         setY(50);
         pane.getChildren().add(this);
     }
-    public void changeHealth(int health,SnakeHead sneak){
+    public void changeHealth(int health){
         this.setText("Health: "+String.valueOf(health));
     }
 }
