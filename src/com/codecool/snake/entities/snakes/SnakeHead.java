@@ -6,6 +6,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.HealthText;
+import com.codecool.snake.entities.HealthText;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.SpeedChangePowerUp;
 import com.codecool.snake.entities.powerups.InverseDirectionPowerUp;
@@ -21,7 +22,6 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
-    private HealthText text;
     private boolean isGameOver;
 
     public SnakeHead(Pane pane, int xc, int yc) {
@@ -33,7 +33,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
         addPart(4);
-        text=new HealthText(pane,this);
+        Globals.healthText = new HealthText(pane,this);
     }
 
     public void step() {
@@ -85,6 +85,10 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
+            if (isOutOfBounds()){
+                health = 0;
+                Globals.healthText.changeHealth(0);
+            }
             if (!isGameOver) {
                 gameOver();
             }
@@ -119,10 +123,6 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void changeHealth ( int diff){
             health += diff;
         }
-
-    public HealthText getText() {
-        return text;
-    }
 
     public int getHealth() {
         return health;
