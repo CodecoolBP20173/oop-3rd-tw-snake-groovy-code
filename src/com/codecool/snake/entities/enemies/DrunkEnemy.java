@@ -6,33 +6,54 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.HealthText;
+import com.codecool.snake.entities.powerups.Shoot;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.animation.FillTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
+import javafx.animation.Transition;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 // a simple enemy TODO make better ones.
-public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
+public class DrunkEnemy extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;
-    private static final int damage = 10;
+    private double speed, direction;
+    private int damage = 15;
     HealthText text;
-    private double direction;
 
-    public SimpleEnemy(Pane pane) {
+    public DrunkEnemy(Pane pane) {
         super(pane);
-        Globals.numberOfEnemies++;
-        setImage(Globals.simpleEnemy);
+        setImage(Globals.drunkEnemy);
         pane.getChildren().add(this);
-        int speed = 1;
-        startingPosition();
-        this.direction = randomDirection();
-        setRotate(this.direction);
-        heading = Utils.directionToVector(this.direction, speed);
+        Random rnd = Utils.rand;
+        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
+        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        setMovementAndDamage();
+
+        ScaleTransition enlarge = new ScaleTransition(Duration.seconds(2), this);
+        enlarge.setByX(1.2);
+        enlarge.setByY(1.2);
+        enlarge.setCycleCount(Timeline.INDEFINITE);
+        enlarge.setAutoReverse(true);
+        enlarge.play();
+
+    }
+
+    private void setMovementAndDamage(){
+        damage = Utils.randInt(-5, 15);
+        speed = Utils.randDouble(0.5, 3);
+        direction += Utils.randDouble(-15, 15) % 360;
+        setRotate(direction);
+        heading = Utils.directionToVector(direction, speed);
     }
 
     public double randomDirection(){
@@ -96,20 +117,13 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     }
 
     @Override
-    public void destroy(){
-        if (Globals.numberOfEnemies < Globals.MAX_ENEMIES) {
-            new SimpleEnemy(pane);
-            Globals.numberOfEnemies++;
-        }
-        Globals.numberOfEnemies--;
-        super.destroy();
-    }
-
-    @Override
     public void step() {
         if (isOutOfBounds()) {
             collisionHandling();
         }
+
+        setMovementAndDamage();
+
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }
@@ -122,7 +136,17 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     }
 
     @Override
+    public void destroy(){
+        if (Globals.numberOfEnemies < Globals.MAX_ENEMIES){
+            new DrunkEnemy(pane);
+            Globals.numberOfEnemies++;
+        }
+        Globals.numberOfEnemies--;
+        super.destroy();
+    }
+
+    @Override
     public String getMessage() {
-        return "10 damage";
+        return String.valueOf(damage) + " damage";
     }
 }
