@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.HealthText;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 
@@ -21,6 +22,8 @@ public class Globals {
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image speedBerry = new Image("Speed.resized.png");
     //.. put here the other images you want to use
+
+    public static HealthText healthText;
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;

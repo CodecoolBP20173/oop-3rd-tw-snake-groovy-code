@@ -54,6 +54,11 @@ public class Game extends Pane {
         for (GameEntity entity: Globals.getGameObjects()){
             entity.destroy();
         }
+
+        if (Globals.healthText != null) {
+            this.getChildren().remove(Globals.healthText);
+        }
+
         Globals.pKeyDown = false;
         create();
         Globals.gameLoop = new GameLoop();
