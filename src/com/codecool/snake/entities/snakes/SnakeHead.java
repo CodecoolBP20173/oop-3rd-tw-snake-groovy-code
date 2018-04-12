@@ -4,9 +4,8 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
+import com.codecool.snake.entities.HealthText;
 import com.codecool.snake.entities.Interactable;
-import com.codecool.snake.entities.HealthText;
-import com.codecool.snake.entities.HealthText;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.SpeedChangePowerUp;
 import com.codecool.snake.entities.powerups.InverseDirectionPowerUp;
@@ -97,10 +96,10 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void gameOver() {
+        Globals.numberOfEnemies = 0;
         Globals.gameLoop.stop();
         System.out.println("game over");
         Globals.game.gameOverDialog();
-
     }
 
     public void addPart(int numParts) {
