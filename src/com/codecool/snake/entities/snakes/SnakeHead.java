@@ -106,14 +106,17 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeSnakeSpeed(){
         Random random = new Random();
-        speed = random.nextInt(5 - 1 + 1) + 1;
+        speed = random.nextInt(6 - 1 + 1) + 1;
         turnRate = speed;
+    }
+
+    public static float getSpeed() {
+        return speed;
     }
 
     public void changeHealth ( int diff){
             health += diff;
         }
-
 
     public HelathText getText() {
         return text;
@@ -122,5 +125,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     public int getHealth() {
         return health;
     }
+
+
 }
 
