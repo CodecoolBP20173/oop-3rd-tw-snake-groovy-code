@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

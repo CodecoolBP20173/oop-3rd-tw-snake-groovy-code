@@ -22,7 +22,10 @@ public class Globals {
     public static Image drunkEnemy = new Image("drunk_enemy.png");
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image speedBerry = new Image("Speed.resized.png");
+    public static Image fear = new Image("fear-monster.resized.png");
     //.. put here the other images you want to use
+
+    public static SnakeHead snakehead;
 
     public static HealthText healthText;
 

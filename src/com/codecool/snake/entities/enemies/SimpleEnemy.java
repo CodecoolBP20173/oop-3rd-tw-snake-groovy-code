@@ -22,6 +22,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     private static final int damage = 10;
     private double direction;
 
+
     public SimpleEnemy(Pane pane) {
         super(pane);
         Globals.numberOfEnemies++;
