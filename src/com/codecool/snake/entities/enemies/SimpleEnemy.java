@@ -5,7 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
-import com.codecool.snake.entities.HelathText;
+import com.codecool.snake.entities.HealthText;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
@@ -20,7 +20,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
 
     private Point2D heading;
     private static final int damage = 10;
-    HelathText text;
+    HealthText text;
     private double direction;
 
     public SimpleEnemy(Pane pane) {

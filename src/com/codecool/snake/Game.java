@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.enemies.DrunkEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.Shoot;
 import com.codecool.snake.entities.powerups.SimplePowerup;
@@ -21,8 +22,8 @@ public class Game extends Pane {
     void create(){
         new SnakeHead(this, 500, 500);
 
-        spawnEnemies("simple", Globals.MAX_ENEMIES);
-
+        spawnEnemies("simple", Globals.MAX_ENEMIES / 2);
+        spawnEnemies("drunk", 3);
 
         new SimplePowerup(this);
         new SimplePowerup(this);
@@ -33,7 +34,8 @@ public class Game extends Pane {
 
     public void spawnEnemy(String type){
         switch (type){
-            case "simple" : new SimpleEnemy(this);
+            case "simple" : new SimpleEnemy(this); break;
+            case "drunk" : new DrunkEnemy(this); break;
         }
     }
 
