@@ -9,11 +9,11 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
-public class SpeedPowerUp extends GameEntity implements Interactable{
+public class InverseDirectionPowerUp extends GameEntity implements Interactable{
     public static boolean turn;
     private final Game game;
 
-    public SpeedPowerUp(Game pane){
+    public InverseDirectionPowerUp(Game pane){
         super(pane);
         game=pane;
         setImage(Globals.speedBerry);
@@ -27,15 +27,15 @@ public class SpeedPowerUp extends GameEntity implements Interactable{
     public void apply(SnakeHead snakeHead) {
         snakeHead.addPart(4);
         destroy();
-        game.newSpeedPowerUp();
+        game.inverseDirection();
         turn = !turn;
     }
 
     @Override
     public String getMessage() {
-        return "Got speed-up :)";
+        return "Go inverse :)";
     }
 
-    public static void speedPowerUp() {
+    public static void inverseDirectionPowerUp() {
     }
 }
