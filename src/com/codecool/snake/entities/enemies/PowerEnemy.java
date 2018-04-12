@@ -1,5 +1,4 @@
 package com.codecool.snake.entities.enemies;
-
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -13,35 +12,38 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
-// a simple enemy TODO make better ones.
-public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
-
-    private Point2D heading;
+public class PowerEnemy extends GameEntity implements Animatable, Interactable{
     private static final int damage = 10;
 
 
-    public SimpleEnemy(Pane pane) {
-        super(pane);
 
-        setImage(Globals.simpleEnemy);
+
+    public PowerEnemy(Pane pane) {
+        super(pane);
+        setImage(Globals.fear);
         pane.getChildren().add(this);
-        int speed = 1;
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-        double direction = rnd.nextDouble() * 360;
-        setRotate(direction);
-        heading = Utils.directionToVector(direction, speed);
+
     }
 
     @Override
     public void step() {
-        if (isOutOfBounds()) {
-            destroy();
+
+        if (getX() < Globals.snakehead.getX()) {
+            setX(getX() + 1);
+
+        } else {
+            setX(getX() - 1);
         }
-        setX(getX() + heading.getX());
-        setY(getY() + heading.getY());
+        if (getY() < Globals.snakehead.getY()) {
+            setY(getY() + 1);
+        } else {
+            setY(getY() - 1);
+        }
+
     }
 
     @Override
@@ -49,10 +51,14 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         player.changeHealth(-damage);
         player.getText().changeHealth(player.getHealth(),player);
         destroy();
+        
     }
 
     @Override
     public String getMessage() {
         return "10 damage";
     }
+
 }
+
+

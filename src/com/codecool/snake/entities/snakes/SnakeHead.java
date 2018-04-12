@@ -28,6 +28,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private HelathText text;
     private boolean isGameOver;
 
+
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
